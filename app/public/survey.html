@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Marvel Friend Finder</title>
+	<title>FriendFinder</title>
 
 	<!-- Latest compiled and minified CSS & JS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -33,7 +33,7 @@
 
 		<hr>
 
-		<h3><strong>Question 1</strong></h3>
+<h3><strong>Question 1</strong></h3>
 		<h4>You're a genius.</h4>
 	 	<select data-placeholder="" class="chosen-select" id="q1">
 	 		<option value=""></option>
@@ -157,12 +157,14 @@
 
 		<hr>
 	    <footer class="footer">
-	     
+	      <div class="container">
+		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
+	      </div>
 	    </footer>
 
 	</div>
 
-			<!-- Modal -->
+	<!-- Modal -->
 	<div id="modalOfResults" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 
@@ -174,7 +176,7 @@
 	      </div>
 	      <div class="modal-body">
 	        <h2 id="nameOfMatch"></h2>
-	        
+	       
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -185,7 +187,7 @@
 	</div>
 
   <script type="text/javascript">
-    let configure = {
+   let configure = {
       '.chosen-select'           : {},
       '.chosen-select-deselect'  : {allow_single_deselect:true},
       '.chosen-select-no-single' : {disable_search_threshold:10},
@@ -197,7 +199,7 @@
     }
     $("#submit").on("click", function(){
     	function validationForm() {
-		  let isItValid = true;
+		 let isItValid = true;
 		  $('.form-control').each(function() {
 		    if ( $(this).val() === '' )
 		        isItValid = false;
@@ -218,9 +220,9 @@
 	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
 	    	}
 	    	// Grab the URL of the website
-	    	let theCurrentUrl = window.location.origin;
+	    	let currentURL = window.location.origin;
 	    	// AJAX post the data to the friends API.
-	    	$.post(theCurrentUrl + "/api/friends", userData, function(data){
+	    	$.post(currentURL + "/api/friends", userData, function(data){
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
 	    		$("#nameOfMatch").text(data.name);
 	    		$('#imgOfMatch').attr("src", data.photo);
@@ -230,7 +232,7 @@
 		}
 		else
 		{
-			alert("Fill me out before you can continue!");
+			alert("Answer all questions to continue");
 		}
     	return false;
     });
